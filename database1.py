@@ -19,10 +19,8 @@ def query_db(depth_min,grad_min):
     WHERE depth > {depth_min} AND gradient > {grad_min}
     """
 
-    conn=engine.connect()
-
-    results=conn.execute(query).fetchall()
-
+    with engine.connect() as conn:
+        results = conn.execute(query).fetchall()
     conn.close()
 
     return results
